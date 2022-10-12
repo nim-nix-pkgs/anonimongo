@@ -7,11 +7,11 @@
   inputs.flakeNimbleLib.type  = "github";
   inputs.flakeNimbleLib.inputs.nixpkgs.follows = "nixpkgs";
   
-  inputs.src-anonimongo-v0_5_0.flake = false;
-  inputs.src-anonimongo-v0_5_0.ref   = "refs/tags/v0.5.0";
-  inputs.src-anonimongo-v0_5_0.owner = "mashingan";
-  inputs.src-anonimongo-v0_5_0.repo  = "anonimongo";
-  inputs.src-anonimongo-v0_5_0.type  = "github";
+  inputs.src-anonimongo-v0_6_1.flake = false;
+  inputs.src-anonimongo-v0_6_1.ref   = "refs/tags/v0.6.1";
+  inputs.src-anonimongo-v0_6_1.owner = "mashingan";
+  inputs.src-anonimongo-v0_6_1.repo  = "anonimongo";
+  inputs.src-anonimongo-v0_6_1.type  = "github";
   
   inputs."nimsha2".owner = "nim-nix-pkgs";
   inputs."nimsha2".ref   = "master";
@@ -64,13 +64,13 @@
   outputs = { self, nixpkgs, flakeNimbleLib, ...}@deps:
   let 
     lib  = flakeNimbleLib.lib;
-    args = ["self" "nixpkgs" "flakeNimbleLib" "src-anonimongo-v0_5_0"];
+    args = ["self" "nixpkgs" "flakeNimbleLib" "src-anonimongo-v0_6_1"];
     over = if builtins.pathExists ./override.nix 
            then { override = import ./override.nix; }
            else { };
   in lib.mkRefOutput (over // {
     inherit self nixpkgs ;
-    src  = deps."src-anonimongo-v0_5_0";
+    src  = deps."src-anonimongo-v0_6_1";
     deps = builtins.removeAttrs deps args;
     meta = builtins.fromJSON (builtins.readFile ./meta.json);
   } );
